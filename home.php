@@ -27,7 +27,9 @@ if ($response['status'] == 'OK') {
 			$resultArray = request($requestUrl);
 			$resultArray = json_decode($resultArray,true);
 			if(!empty($resultArray['results']["bindings"])){
+            echo '<h2>',$concept['text'], '</h2><br>';
 				echo $resultArray['results']["bindings"][0]["abstract"]["value"];
+            echo '<br>';
 			}
 		}
 	}
@@ -35,7 +37,7 @@ if ($response['status'] == 'OK') {
 	echo 'Error in the concept tagging call: ', $response['statusInfo'];
 }
 
-
+//url with query for DBPedia
 function getUrlDbpediaAbstract($term){
    $format = 'json';
 
@@ -56,6 +58,7 @@ function getUrlDbpediaAbstract($term){
    return $searchUrl;
 }
 
+//Same function as above, but uses direct DBPedia URL (better!)
 function getUrlDbpediaAbstractURL($url){
    $format = 'json';
 
@@ -76,6 +79,7 @@ function getUrlDbpediaAbstractURL($url){
    return $searchUrl;
 }
 
+//Posts with cURL
 function request($url){
  
    // is curl installed?
@@ -103,6 +107,7 @@ function request($url){
    return $response;
 }
 
+//Prints an array neatly
 function printArray($array, $spaces = ""){
    $retValue = "";
    
